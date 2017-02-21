@@ -1,4 +1,12 @@
-Reference: 
+// Reference:
+// 1. Jack's Demo Repo: https://github.com/jhkolb/demosvc/blob/master/main.go
+// 2. Documentation: https://godoc.org/gopkg.in/immesys/bw2bind.v3#BW2Client.SetEntity
+
+// Steps:
+// 1. check permission with setentity, set entity from environment variables, setentityfromenviron
+// 2. Create string payload object (createstringpayloadobject?)
+// 3. Replace fmt.println with bosswave publish (publish to namespace)
+
 import (
 	"fmt"
 	"time"
