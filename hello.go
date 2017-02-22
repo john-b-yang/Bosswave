@@ -16,13 +16,22 @@ import (
 )
 
 func main() {
+	message := "Message"
 	bwClient, err := bw2.Connect("")
+	bwClient.SetEntityFromEnvironOrExit()
+
 	if err != nil {
 		fmt.Printf("Failed to connect to Bosswave agent: %v\n", err)
 		os.Exit(1)
 	}
+
 	for {
-		fmt.Println("Hello World")
+		payload := bw2.CreateStringPayloadObject(message)
+		bwClient.PublishOrExit(&bw2.PublishParams{
+			URI:            parameters.MustString("to"),
+			AutoChain:      true,
+			PayloadObjects: []bw2.PayloadObject{payload},
+		})
 		time.Sleep(10*time.Second)
 	}
 }
