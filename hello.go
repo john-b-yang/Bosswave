@@ -6,7 +6,7 @@
 // 1. check permission with setentity, set entity from environment variables, setentityfromenviron
 // 2. Create string payload object (createstringpayloadobject?)
 // 3. Replace fmt.println with bosswave publish (publish to namespace)
-
+package main
 import (
 	"fmt"
 	"time"
@@ -24,14 +24,21 @@ func main() {
 		fmt.Printf("Failed to connect to Bosswave agent: %v\n", err)
 		os.Exit(1)
 	}
-
+	//message = "round 2"
 	for {
 		payload := bw2.CreateStringPayloadObject(message)
-		bwClient.PublishOrExit(&bw2.PublishParams{
-			URI:            parameters.MustString("to"),
+		error := bwClient.Publish(&bw2.PublishParams{
+
+			URI:            "john/test",
 			AutoChain:      true,
+
+
 			PayloadObjects: []bw2.PayloadObject{payload},
 		})
+		if (error != nil) {
+			fmt.Print(error)
+			os.Exit(1)
+		}
 		time.Sleep(10*time.Second)
 	}
 }
