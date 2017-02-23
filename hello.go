@@ -24,10 +24,10 @@ func main() {
 		fmt.Printf("Failed to connect to Bosswave agent: %v\n", err)
 		os.Exit(1)
 	}
-	//message = "round 2"
+
 	for {
 		payload := bw2.CreateStringPayloadObject(message)
-		error := bwClient.Publish(&bw2.PublishParams{
+		err = bwClient.Publish(&bw2.PublishParams{
 
 			URI:            "john/test",
 			AutoChain:      true,
@@ -35,8 +35,8 @@ func main() {
 
 			PayloadObjects: []bw2.PayloadObject{payload},
 		})
-		if (error != nil) {
-			fmt.Print(error)
+		if (err != nil) {
+			fmt.Print(err)
 			os.Exit(1)
 		}
 		time.Sleep(10*time.Second)
