@@ -26,8 +26,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	channel, err = bwClient.Subscribe(&bw2.Subscribe{
+	channel, err := bwClient.Subscribe(&bw2.SubscribeParams{
 		URI:           "john/test",
-		AutoChain:      true
+		AutoChain:      true,
 	})
 }
