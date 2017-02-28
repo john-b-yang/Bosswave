@@ -28,11 +28,8 @@ func main() {
 	for {
 		payload := bw2.CreateStringPayloadObject(message)
 		err = bwClient.Publish(&bw2.PublishParams{
-
 			URI:            "john/test",
 			AutoChain:      true,
-
-
 			PayloadObjects: []bw2.PayloadObject{payload},
 		})
 		if (err != nil) {

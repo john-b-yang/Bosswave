@@ -11,14 +11,13 @@
 package main
 import (
 	"fmt"
-	"time"
+	//"time"
 	"os"
 
 	bw2 "gopkg.in/immesys/bw2bind.v5"
 )
 
 func main() {
-	message := "Message"
 	bwClient, err := bw2.Connect("")
 	bwClient.SetEntityFromEnvironOrExit()
 
@@ -27,20 +26,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	for {
-		payload := bw2.CreateStringPayloadObject(message)
-		err = bwClient.Publish(&bw2.PublishParams{
-
-			URI:            "john/test",
-			AutoChain:      true,
-
-
-			PayloadObjects: []bw2.PayloadObject{payload},
-		})
-		if (err != nil) {
-			fmt.Print(err)
-			os.Exit(1)
-		}
-		time.Sleep(10*time.Second)
-	}
+	channel, err = bwClient.Subscribe(&bw2.Subscribe{
+		URI:           "john/test",
+		AutoChain:      true
+	})
 }
