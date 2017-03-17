@@ -33,7 +33,7 @@ func main() {
 	}
 }
 
-func sendPayload(message string, bwClient BW2Client) {
+func sendPayload(message string, bwClient *bw2.BW2Client) {
 	payload := bw2.CreateStringPayloadObject(message)
 	err := bwClient.Publish(&bw2.PublishParams{
 		URI:            "john/test",
