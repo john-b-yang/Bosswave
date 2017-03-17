@@ -27,13 +27,13 @@ func main() {
 	}
 
 	for {
-		sendPayload(message)
-		sendPayload(message2)
+		sendPayload(message, bwClient)
+		sendPayload(message2, bwClient)
 		time.Sleep(10*time.Second)
 	}
 }
 
-func sendPayload(message string) {
+func sendPayload(message string, bwClient BW2Client) {
 	payload := bw2.CreateStringPayloadObject(message)
 	err := bwClient.Publish(&bw2.PublishParams{
 		URI:            "john/test",
