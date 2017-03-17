@@ -27,16 +27,15 @@ func main() {
 	}
 
 	for {
-		payload := bw2.CreateStringPayloadObject(message)
-		payload2 := bw2.CreateStringPayloadObject(message2)
-		sendPayload(payload)
-		sendPayload(payload2)
+		sendPayload(message)
+		sendPayload(message2)
 		time.Sleep(10*time.Second)
 	}
 }
 
-func sendPayload(payload string) {
-	err = bwClient.Publish(&bw2.PublishParams{
+func sendPayload(message string) {
+	payload := bw2.CreateStringPayloadObject(message)
+	err := bwClient.Publish(&bw2.PublishParams{
 		URI:            "john/test",
 		AutoChain:      true,
 		PayloadObjects: []bw2.PayloadObject{payload, payload},
