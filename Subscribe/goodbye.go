@@ -27,19 +27,20 @@ func main() {
 		os.Exit(1)
 	}
 
+	channel, subErr := bwClient.Subscribe(&bw2.SubscribeParams{
+		URI:       "john/test",
+		AutoChain: true,
+	})
+
+	if subErr != nil {
+		fmt.Printf("Could not subscribe to URI")
+		os.Exit(1)
+	}
+
 	for {
-		channel, subErr := bwClient.Subscribe(&bw2.SubscribeParams{
-			URI:       "john/test",
-			AutoChain: true,
-		})
-
-		if subErr != nil {
-			fmt.Printf("Could not subscribe to URI")
-			os.Exit(1)
-		}
-
 		msg := <- channel
-		fmt.Println(msg)
+		byteArray := msg.POs[0].GetContents()
+		fmt.Println(string(byteArray[:]))
 	}
 
 	//Form connection so that we can continuously check URI for updates

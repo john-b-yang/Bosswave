@@ -16,7 +16,8 @@ import (
 )
 
 func main() {
-	message := "Message"
+	message := "Message 1 2 3"
+	message2 := "Message 4 5 6"
 	bwClient, err := bw2.Connect("")
 	bwClient.SetEntityFromEnvironOrExit()
 
@@ -27,10 +28,11 @@ func main() {
 
 	for {
 		payload := bw2.CreateStringPayloadObject(message)
+		payload2 := bw2.CreateStringPayloadObject(message2)
 		err = bwClient.Publish(&bw2.PublishParams{
 			URI:            "john/test",
 			AutoChain:      true,
-			PayloadObjects: []bw2.PayloadObject{payload},
+			PayloadObjects: []bw2.PayloadObject{payload, payload2},
 		})
 		if (err != nil) {
 			fmt.Print(err)
